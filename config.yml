@@ -1,0 +1,13 @@
+version: 2.1
+orbs:
+  snyk: snyk/snyk@0.0.12
+jobs:
+  build:
+    docker:
+      - image: node:10.22
+    steps:
+      - checkout
+      - run: 
+        name: Install dependencies
+        command: npm install
+      - snyk/scan
