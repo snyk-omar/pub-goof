@@ -7,4 +7,13 @@ jobs:
       - image: node:10.22
     steps:
       - checkout
-      - snyk/scan
+      - run: 
+          name: Install dependencies
+          command: npm install
+  snyk:
+    steps:
+      - run: |
+          apt-get update
+          apt-get install sudo
+      - snyk/scan:
+            fail-on-issues: false
