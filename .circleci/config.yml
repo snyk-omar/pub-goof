@@ -20,3 +20,12 @@ jobs:
           apt-get install sudo
       - snyk/scan:
             fail-on-issues: false
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test-snyk:
+          requires:
+            - build
