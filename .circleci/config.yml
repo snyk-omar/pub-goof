@@ -1,16 +1,19 @@
 version: 2.1
 orbs:
   snyk: snyk/snyk@0.0.12
+defaults: &defaults
+  docker:
+    - image: node:10.22
 jobs:
   build:
-    docker:
-      - image: node:10.22
+    <<: *defaults
     steps:
       - checkout
       - run: 
           name: Install dependencies
           command: npm install
-  snyk:
+  test-snyk:
+    <<: *defaults
     steps:
       - run: |
           apt-get update
